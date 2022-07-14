@@ -12,8 +12,11 @@ const temp_el = document.querySelectorAll(".temp");
 const grid_item_el = document.querySelectorAll(".grid_item");
 const grid_day_el = document.querySelectorAll(".day");
 
+//MORE-button
+const more_el = document.querySelector(".aside_more");
 //card
-
+const card_container = document.querySelector(".popup");
+const card = document.querySelector(".card");
 const card_date_el = document.querySelector(".card_date");
 const card_w_icon_el = document.querySelector(".card_w_icon");
 const card_w_desc_el = document.querySelector(".card_w_desc");
@@ -22,6 +25,7 @@ const card_pressure_el = document.querySelector(".card_pressure");
 const card_temp_value_el = document.querySelectorAll(".card_temp_value");
 const card_wind_value_el = document.querySelectorAll(".card_wind_value");
 
+//search-input
 const input = document.querySelector(".search_input");
 input.addEventListener('change', () => {
   city = input.value;
@@ -31,10 +35,11 @@ input.addEventListener('change', () => {
 const day_arr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const month_arr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+//fade functions for card
 const fadeIn = (el) => {
   let opacity = 0.01;
 
-  var timer = setInterval(function () {
+  let timer = setInterval(function () {
     el.style.display = "flex";
     if (opacity >= 1) {
       clearInterval(timer);
@@ -46,7 +51,7 @@ const fadeIn = (el) => {
 
 const fadeOut = (el) => {
   let opacity = 1;
-  var timer = setInterval(function () {
+  let timer = setInterval(function () {
     if (opacity <= 0.1) {
       clearInterval(timer);
       el.style.display = "none";
@@ -61,20 +66,16 @@ const block = document.querySelector('.popup');
 const open_btn = document.querySelector('.aside_more');
 const close_btn = document.querySelector('.card_close_button');
 
-let flag = false;
 
 open_btn.addEventListener('click', (e) => {
   fadeIn(block);
-  flag = true;
 });
 
 close_btn.addEventListener('click', (e) => {
   fadeOut(block);
-  flag = false;
 });
 
-
-
+//take city coordinates
 async function city_coord_API() {
   try {
     let city_url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=a983a68979188b1b09ccf33228a97f93`;
@@ -114,8 +115,12 @@ function current_time(weather, forecast) {
     month = time.getMonth();
     let hour = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
     let min = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
-    hour = hour > 12 ? hour - 12 : hour;
-    let ampm = hour >= 12 ? " PM" : " AM";
+    let ampm;
+    if (hour > 12) {
+      hour -= 12;
+      ampm = " PM";
+    }
+    else ampm = " AM";
     clock_el.innerHTML = `${hour}:${min}`;
     am_pm_el.innerHTML = `${ampm}`;
     date_el.innerHTML = `${day_arr[day]}, ${date}, ${month_arr[month]}`;
@@ -240,34 +245,41 @@ function light_current() {
 function start_work(weather_obj) {
   console.log(weather_obj);
   light_current();
+  resize();
   click_on_forecast(weather_obj);
   time_zone_change(weather_obj);
   current_time(weather_obj);
   weather_temp(weather_obj);
 }
 
+//rotating card
 window.onload = function () {
-  const card_container = document.querySelector(".popup");
-  const card = document.querySelector(".card");
 
   card_container.addEventListener('mouseleave', function () {
-    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    card.style.transition = `all 1s`;
+    if (window.innerWidth > 650) {
+      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      card.style.transition = `all 1s`;
+    }
   })
 
   card_container.addEventListener('mouseenter', function () {
-    card.style.transition = `none`;
+    if (window.innerWidth > 650) {
+      card.style.transition = `none`;
+    }
   })
 
   card_container.addEventListener('mousemove', function (event) {
-    const pos = {
-      x: getDegrees(getPercentage(event.clientX, window.innerWidth)),
-      y: getDegrees(getPercentage(event.clientY, window.innerHeight))
-    };
+    if (window.innerWidth > 650) {
+      const pos = {
+        x: getDegrees(getPercentage(event.clientX, window.innerWidth)),
+        y: getDegrees(getPercentage(event.clientY, window.innerHeight))
+      };
 
-    card.style.transform = `rotateX(${-pos.y}deg) rotateY(${pos.x}deg)`;
+      card.style.transform = `rotateX(${-pos.y}deg) rotateY(${pos.x}deg)`;
+    }
 
   });
+
 }
 
 function getPercentage(num, total) {
@@ -276,6 +288,29 @@ function getPercentage(num, total) {
 
 function getDegrees(percentage, max = 30) { //160
   return max * percentage / 100 - max / 2;
+}
+
+//changing MORE-button location and card scale
+window.addEventListener('resize', resize);
+
+function resize() {
+  if (window.innerWidth < 650) {
+    card.style.transform = `scale(${window.innerWidth / 700})`;
+  }
+  else card.style.transform = `scale(1)`;
+
+  if (window.innerWidth < 420) {
+    more_el.style.display = `block`;
+    more_el.style.position = `relative`;
+    more_el.style.top = `0px`;
+    more_el.style.marginBottom = `10px`;
+  }
+  else {
+    more_el.style.display = `inline-block`;
+    more_el.style.position = `absolute`;
+    more_el.style.top = `65px`;
+    more_el.style.marginBottom = `0px`;
+  }
 }
 
 city_coord_API();
