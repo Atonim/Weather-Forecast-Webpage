@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+  </style>
+</head>
+
+<body>
+  <div class="popup">
+    <div class="card">
+      <div class="card_date_box">
+        <div class="card_date"></div>
+      </div>
+      <dic class="card_w_icon_box">
+        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="card_w_icon">
+      </dic>
+      <div class="card_w_desc"></div>
+      <div class="card_humidity"></div>
+      <div class="card_pressure"></div>
+      <div class="card_temp">
+        <div class="card_temp_h">TEMPERATURE</div>
+        <div class="card_temp_value">Morning</div>
+        <div class="card_temp_value">Day</div>
+        <div class="card_temp_value">Evening</div>
+        <div class="card_temp_value">Night</div>
+        <div class="card_temp_value card_max">MAX</div>
+        <div class="card_temp_value card_min">MIN</div>
+      </div>
+      <div class="card_wind">
+        <div class="card_wind_h">WIND</div>
+        <div class="card_wind_value">Wind speed</div>
+        <div class="card_wind_value">Wind gust</div>
+        <div class="card_wind_value">Wind degrees</div>
+      </div>
+      <div class="card_close_button_box">
+        <div class="card_close_button">
+          &#10006;
+        </div>
+      </div>
+    </div>
+  </div>
+  <header class="container" id="container">
+    <div class="header">
+      <div>
+        <h1 align="center" class="logo">Weather Forecast</h1>
+      </div>
+      <nav class="header_menu">
+        <div class="time_zone">Rus</div>
+        <input type="search" placeholder="Search by city" size="30" class="search_input">
+      </nav>
+    </div>
+  </header>
+  <nav class="container">
+    <div class="navigation">
+      <div class="current_info">
+        <span class="clock">TIME</span><span class="am_pm"></span>
+      </div>
+      <div class="date">
+        <span class="day"></span> <span class="current_date">DATE</span>
+      </div>
+    </div>
+  </nav>
+  <nav class="container">
+    <div class="aside">
+      <div class="aside_bar">
+        <div class="aside_corner_box">
+          <div class="weather_info">
+            <span class="parametr"> Humidity: </span>
+            <span class="value"> 90% </span>
+          </div>
+          <div class="weather_info">
+            <span class="parametr"> Pressure: </span>
+            <span class="value"> 121 </span>
+          </div>
+          <div class="weather_info">
+            <span class="parametr"> Wind speed: </span>
+            <span class="value"> 227 </span>
+          </div>
+        </div>
+        <div class="aside_more">
+          <div class="more"> MORE INFO </div>
+        </div>
+      </div>
+      <div class="aside_aftercut"></div>
+      <div class="aside_cut"></div>
+    </div>
+  </nav>
+  <main class="container">
+    <div class="mainbackground">
+      <div class="main">
+        <div class="line1"></div>
+        <div class="mainblock">
+          <div class="separator"></div>
+          <div class="grid_container">
+            <div class="grid_item">
+              <div class="day"> Monday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Tuesday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Wednesday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Thursday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Friday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Saturday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+            <div class="grid_item">
+              <div class="day"> Sunday </div>
+              <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="image" class="w_icon">
+              <div class="temp">Day - 20.1&#176</div>
+              <div class="temp">Night - 20.1&#176</div>
+            </div>
+          </div>
+          <div class="separator"></div>
+        </div>
+        <div class="line2"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="container">
+    <div class="footer">
+      <h4 align="center">Weather Forecast</h4>
+      <p align="center" class="footertext">2022 Efremov Artem | <a href="https://vk.com/atonim_nice_wh"
+          target="_blank">About the project</a> |
+        <a href="https://vk.com/atonim_nice_wh" target="_blank">Get contact</a>
+      </p>
+    </div>
+  </footer>
+</body>
+
+<script src="js/script.js"></script>
+
+</html>
